@@ -35,7 +35,8 @@ def handleOverviews(sock, cursor, args):
     cursor.execute(sql_command, arg_arr)
     # then return cursor.fetchall (all rows from database) here using dump() and flush()
     out_flow = sock.makefile(mode="wb")
-    dump(cursor.fetchall(), out_flow)
+    rows = cursor.fetchall()
+    dump(rows, out_flow)
     out_flow.flush()
 
 
