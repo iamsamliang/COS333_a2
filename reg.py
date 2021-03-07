@@ -65,8 +65,8 @@ def main(argv):
         submit_but = QPushButton("Submit")
 
         # retrieve values when submit button is clicked
-        dept, course_num, area, title = submit_but.clicked.connect(
-            retrieveText)
+        # dept, course_num, area, title = submit_but.clicked.connect(
+        #     retrieveText)
 
         # prepare the packet to send to regserver.py
         packet = ["overviews", dept, course_num, area, title]
@@ -95,7 +95,6 @@ def main(argv):
 
         # user interface: gets information from the database
         # and prints to user
-        print(db_rows)
         for row in db_rows:
             unformatted_str = "{:>5} {:>4} {:>6} {:>4} {}".format(
                 str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
