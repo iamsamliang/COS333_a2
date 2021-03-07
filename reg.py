@@ -36,13 +36,17 @@ def main(argv):
         # initiation code line
         app = QApplication(argv)
 
+        dept = ""
+        course_num = ""
+        area = ""
+        title = ""
+
         # extracts the input in each of the 4 lines when the submit button is clicked
         def retrieveText():
             dept = str(deptLine.text())
             course_num = str(courseNumLine.text())
             area = str(areaLine.text())
             title = str(titleLine.text())
-            return dept, course_num, area, title
 
         # Textfields for a dept, coursenum, area, title
         deptLab = QLabel("Dept: ")
@@ -65,8 +69,7 @@ def main(argv):
         submit_but = QPushButton("Submit")
 
         # retrieve values when submit button is clicked
-        # dept, course_num, area, title = submit_but.clicked.connect(
-        #     retrieveText)
+        submit_but.clicked.connect(retrieveText)
 
         # prepare the packet to send to regserver.py
         packet = ["overviews", dept, course_num, area, title]
