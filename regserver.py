@@ -137,9 +137,10 @@ def main(argv):
                 print('Closed socket')
             except Exception as e:
                 print(e, file=stderr)
-        except Exception as e:
-            print(e, file=stderr)
-            exit(1)
 
         cursor.close()
         connection.close()
+
+    except Exception as e:
+        print(e, file=stderr)
+        exit(1)
