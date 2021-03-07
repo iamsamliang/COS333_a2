@@ -113,6 +113,8 @@ def main(argv):
 
         # submit button
         top_layout_right = QVBoxLayout()
+        top_layout_right.setSpacing(0)
+        top_layout_right.setContentsMargins(0, 0, 0, 0)
         top_layout_right.addWidget(submit_but)
         top_layout_right.setAlignment(Qt.AlignCenter)
         top_layout.addLayout(top_layout_right, 0, 2, 4, 1)
