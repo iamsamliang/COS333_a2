@@ -95,6 +95,7 @@ def main(argv):
 
         # user interface: gets information from the database
         # and prints to user
+        print(db_rows)
         for row in db_rows:
             unformatted_str = "{:>5} {:>4} {:>6} {:>4} {}".format(
                 str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
