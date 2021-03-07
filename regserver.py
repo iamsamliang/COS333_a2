@@ -16,33 +16,31 @@ from database_handler import create_sql_command
 
 # determine whether to call handleOverviews or handleDetails
 def handler(sock, cursor):
-    flo = sock.makefile(mode="rb")
-    method = load(flo)
-    if method == "getOverviews":
-        handleOverviews(sock, cursor)
+    in_flow = sock.makefile(mode="rb")
+    package = load(in_flow)
+    if package[0] == "overviews":
+        handleOverviews(sock, cursor, package)
     else:
-        handleDetails(sock)
+        handleDetails(sock, cursor, package)
 
 
 # handle getOverviews:
-def handleOverviews(sock, cursor):
+def handleOverviews(sock, cursor, args):
     print("Received command: getOverviews")
-    # get the arguments from the client and load them into args
-    flo = sock.makefile(mode="rb")
-    args = load(flo)
 
+    # args is a list that stores all the arguments needed for sql command
     # create appropriate sql command
     sql_command, arg_arr = create_sql_command(args)
     # cursor.execute here
     cursor.execute(sql_command, arg_arr)
     # then return cursor.fetchall (all rows from database) here using dump() and flush()
-    flo = sock.makefile(mode="wb")
-    dump(cursor.fetchall(), flo)
-    flo.flush()
+    out_flow = sock.makefile(mode="wb")
+    dump(cursor.fetchall(), out_flow)
+    out_flow.flush()
 
 
 # handle getDetails
-def handleDetails(sock, cursor):
+def handleDetails(sock, cursor, package):
     sql_command1 = "SELECT classes.courseid, classes.days, classes.starttime, classes.endtime, classes.bldg, classes.roomnum, crosslistings.dept, crosslistings.coursenum, courses.area, courses.title, courses.descrip, courses.prereqs FROM classes, crosslistings, courses WHERE classes.courseid = courses.courseid AND crosslistings.courseid = courses.courseid AND classid=? ORDER BY dept ASC, coursenum ASC"
 
     # fetching professors if any

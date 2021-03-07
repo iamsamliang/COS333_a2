@@ -20,52 +20,29 @@ from database_handler import create_sql_command
 # regserver.py handles database
 
 
-def mousePressEvent(self, QMouseEvent):
-    if app.mouseButtons() & QtCore.Qt.LeftButton:
-        self.clicked.emit()
-
-
-def mouseReleaseEvent(self, QMouseEvent):
-    cursor = QtGui.QCursor()
-    print(cursor.pos())
-    submit_but.clicked.connect(buttonSlot)
-
-
-def buttonSlot():
-    QMessageBox.information(window, 'Class Details')
-    textEdit.append()
-
-# source: https://www.programcreek.com/python/example/101657/PyQt5.QtCore.Qt.Key_Up
-
-
-def keyPressEvent(self, event):
-    key = event.key()
-    # if key == Qt.Key_Tab:
-
-    # https://stackoverflow.com/questions/43304803/moving-the-cursor-in-a-pyqt5-text-edit-doesnt-work
-    # cursor.movePosition(), cursor.movePosition(cursor.Left, cursor.KeepAnchor,  3)
-    # elif key == Qt.Key_Up:
-
-    # elif key == Qt.Key_Left:
-
-    # elif key == Qt.Key_Enter:
-
-
 def main(argv):
     # argparse is user-interface related code
     # Create parser that has a description of the program and host/port positional arguments
-    # parser = argparse.ArgumentParser(
-    #     description='Client for the registrar application', allow_abbrev=False)
-    # parser.add_argument(
-    #     "host", type=str, help="the host on which the server is running", nargs=1)
-    # parser.add_argument(
-    #     "port", type=int, help="the port at which the server is listening", nargs=1)
-    # args = parser.parse_args()
+    parser = argparse.ArgumentParser(
+        description='Client for the registrar application', allow_abbrev=False)
+    parser.add_argument(
+        "host", type=str, help="the host on which the server is running", nargs=1)
+    parser.add_argument(
+        "port", type=int, help="the port at which the server is listening", nargs=1)
+    args = parser.parse_args()
 
     # database code
     try:
         # initiation code line
         app = QApplication(argv)
+
+        # extracts the input in each of the 4 lines when the submit button is clicked
+        def retrieveText():
+            dept = str(deptLine.text())
+            course_num = str(courseNumLine.text())
+            area = str(areaLine.text())
+            title = str(titleLine.text())
+            return dept, course_num, area, title
 
         # Textfields for a dept, coursenum, area, title
         deptLab = QLabel("Dept: ")
@@ -80,13 +57,48 @@ def main(argv):
         titleLab = QLabel("Title: ")
         titleLab.setAlignment(Qt.AlignRight)
         titleLine = QLineEdit()
-        listWidget = QListWidget()
 
         # list box that can scroll vertically and horizontally
         list_box = QListWidget()
 
         # submit button
         submit_but = QPushButton("Submit")
+
+        # retrieve values when submit button is clicked
+        dept, course_num, area, title = submit_but.clicked.connect(
+            retrieveText)
+
+        # prepare the packet to send to regserver.py
+        packet = ["overviews", dept, course_num, area, title]
+
+        # get the host and port
+        host = argv[1]
+        port = int(argv[2])
+
+        # send the values to regserver.py
+        sock = socket()
+        sock.connect((host, port))
+        out_flow = sock.makefile(mode='wb')
+        dump(packet, out_flow)
+        out_flow.flush()
+
+        # retrieve the values from regserver.py
+        in_flow = sock.makefile(mode='rb')
+        db_rows = load(in_flow)
+
+        # close connection
+        sock.close()
+
+        # user interface (prints table layout)
+        wrapper = textwrap.TextWrapper(
+            width=72, break_long_words=False, subsequent_indent=(23 * ' '))
+
+        # user interface: gets information from the database
+        # and prints to user
+        for row in db_rows:
+            unformatted_str = "{:>5} {:>4} {:>6} {:>4} {}".format(
+                str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
+            list_box.addItem(wrapper.fill(unformatted_str))
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
@@ -228,22 +240,6 @@ def main(argv):
         # in the list box, use arrow keys to go up and down
         # in the list box, hitting enter on a highlighted item opens it
         # close the details box for a selected class item by hitting enter
-
-        # user interface (prints table layout)
-        # print("ClsId Dept CrsNum Area Title")
-        # print("----- ---- ------ ---- -----")
-        # wrapper = textwrap.TextWrapper(
-        #     width=72, break_long_words=False, subsequent_indent=(23 * ' '))
-
-        # # user interface: gets information from the database
-        # # and prints to user
-        # row = cursor.fetchone()
-        # while row is not None:
-        #     unformatted_str = "{:>5} {:>4} {:>6} {:>4} {}".format(
-        #         str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
-
-        #     print(wrapper.fill(unformatted_str))
-        #     row = cursor.fetchone()
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
 # If some other program has corrupted the reg.sqlite database file
