@@ -33,20 +33,12 @@ def main(argv):
 
     # database code
     try:
+        # get the host and port
+        host = argv[1]
+        port = int(argv[2])
+
         # initiation code line
         app = QApplication(argv)
-
-        dept = ""
-        course_num = ""
-        area = ""
-        title = ""
-
-        # extracts the input in each of the 4 lines when the submit button is clicked
-        def retrieveText():
-            dept = str(deptLine.text())
-            course_num = str(courseNumLine.text())
-            area = str(areaLine.text())
-            title = str(titleLine.text())
 
         # Textfields for a dept, coursenum, area, title
         deptLab = QLabel("Dept: ")
@@ -71,12 +63,7 @@ def main(argv):
         # retrieve values when submit button is clicked
         submit_but.clicked.connect(retrieveText)
 
-        # prepare the packet to send to regserver.py
-        packet = ["overviews", dept, course_num, area, title]
-
-        # get the host and port
-        host = argv[1]
-        port = int(argv[2])
+        packet = ["overviews", "", "", "", ""]
 
         # send the values to regserver.py
         sock = socket()
@@ -102,6 +89,30 @@ def main(argv):
             unformatted_str = "{:>5} {:>4} {:>6} {:>4} {}".format(
                 str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
             list_box.addItem(wrapper.fill(unformatted_str))
+
+        # extracts the input in each of the 4 lines when the submit button is clicked, create a socket connection with regserver.py, and send the input to regserver.py. Retrieve the return value from regserver.py and close socket connection
+        def retrieveText():
+            dept = str(deptLine.text())
+            course_num = str(courseNumLine.text())
+            area = str(areaLine.text())
+            title = str(titleLine.text())
+
+            # prepare the packet to send to regserver.py
+            packet = ["overviews", dept, course_num, area, title]
+
+            # send the values to regserver.py
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
+
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            db_rows = load(in_flow)
+
+            # close connection
+            sock.close()
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
