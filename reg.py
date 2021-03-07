@@ -112,7 +112,10 @@ def main(argv):
         top_layout.addWidget(titleLine, 3, 1)
 
         # submit button
-        top_layout.addWidget(submit_but, 0, 2, alignment=Qt.AlignCenter)
+        top_layout_right = QVBoxLayout()
+        top_layout_right.addWidget(submit_but)
+        top_layout_right.setAlignment(Qt.AlignCenter)
+        top_layout.addLayout(top_layout_right, 0, 2, 4, 1)
 
         # top layout frame
         top_frame = QFrame()
