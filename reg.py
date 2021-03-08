@@ -76,16 +76,22 @@ def main(argv):
         deptLab = QLabel("Dept: ")
         deptLab.setAlignment(Qt.AlignRight)
         deptLine = QLineEdit()
-        # deptLine.keyPressEvent(QKeyEvent())
+        deptLine.returnPressed.connect(retrieveText)
+
         courseLab = QLabel("Number: ")
         courseLab.setAlignment(Qt.AlignRight)
         courseNumLine = QLineEdit()
+        courseNumLine.returnPressed.connect(retrieveText)
+
         areaLab = QLabel("Area: ")
         areaLab.setAlignment(Qt.AlignRight)
         areaLine = QLineEdit()
+        areaLine.returnPressed.connect(retrieveText)
+
         titleLab = QLabel("Title: ")
         titleLab.setAlignment(Qt.AlignRight)
         titleLine = QLineEdit()
+        titleLine.returnPressed.connect(retrieveText)
 
         # list box that can scroll vertically and horizontally
         list_box = QListWidget()
