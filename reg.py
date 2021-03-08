@@ -71,12 +71,10 @@ def main(argv):
         def retrieveDetails():
             # get the courseId from the selection
             selected_str = str(list_box.currentItem().text())
-            print(selected_str)
             # selection = selectedRow[0]
             # print(selection)
             words = selected_str.split()
-            print(words)
-            class_id = words[0]
+            class_id = int(words[0])
             print(class_id)
             packet = ["details", class_id]
 

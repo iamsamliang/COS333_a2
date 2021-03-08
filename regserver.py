@@ -80,6 +80,8 @@ def handleDetails(sock, cursor, args):
 
     row = cursor.fetchone()
     while row is not None:
+        # delete later
+        print("momma's first while loop")
         message += f"Dept and Number: {str(row[6])} {str(row[7])}"
         row = cursor.fetchone()
 
@@ -97,6 +99,7 @@ def handleDetails(sock, cursor, args):
     cursor.execute(sql_command2, [courseid])
     row = cursor.fetchone()
     while row is not None:
+        print("In the second while loop")
         message += f"Professor: {str(row[0])}"
         row = cursor.fetchone()
 
