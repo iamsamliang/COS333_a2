@@ -66,7 +66,8 @@ def main(argv):
                 list_box.addItem(line_string)
 
             # automatically highlight first row each time
-            list_box.setCurrentRow(0, QItemSelectionModel.Toggle)
+            list_box.currentItem.setSelected(False)
+            list_box.setCurrentRow(0)
 
         # get the host and port
         host = argv[1]
