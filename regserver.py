@@ -69,7 +69,7 @@ def handleDetails(sock, cursor, args):
     message += f"Start time: {str(row[2])}\n"
     message += f"End time: {str(row[3])}\n"
     message += f"Building: {str(row[4])}\n"
-    message += f"Room: {str(row[5])}\n"
+    message += f"Room: {str(row[5])}\n\n"
     message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
 
     row = cursor.fetchone()
