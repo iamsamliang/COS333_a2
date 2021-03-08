@@ -52,12 +52,8 @@ def handleDetails(sock, cursor, args):
     sql_command2 = "SELECT profs.profname FROM coursesprofs, profs WHERE coursesprofs.courseid=? AND coursesprofs.profid=profs.profid ORDER BY profname"
 
     print("args[1] value: " + str(args[1]))
-    print("At cursor.execute(sql_command1, args[1])")
-    cursor.execute(sql_command1, args[1])
-    print("At line 58")
+    cursor.execute(sql_command1, [args[1]])
     row = cursor.fetchone()
-    print("at line 60")
-    print(row)
 
     # if classid does not exist
     if row is None:
@@ -66,15 +62,12 @@ def handleDetails(sock, cursor, args):
         exit(1)
 
     firstrow = row
-    print("at line 70")
-    print(firstrow)
     courseid = str(row[0])
 
     # wrapper = textwrap.TextWrapper(
     #    width=72, break_long_words=False)
     # wrapper_spec = textwrap.TextWrapper(
     #    width=72)
-    print("above creation of message")
     message += f"Course Id: {courseid}"
     message += '\n'
     message += f"Days: {str(row[1])}"
