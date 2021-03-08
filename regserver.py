@@ -42,6 +42,9 @@ def handleOverviews(sock, cursor, args):
 
 # handle getDetails
 def handleDetails(sock, cursor, package):
+    print("Received command: getDetails")
+
+    message = ""
     sql_command1 = "SELECT classes.courseid, classes.days, classes.starttime, classes.endtime, classes.bldg, classes.roomnum, crosslistings.dept, crosslistings.coursenum, courses.area, courses.title, courses.descrip, courses.prereqs FROM classes, crosslistings, courses WHERE classes.courseid = courses.courseid AND crosslistings.courseid = courses.courseid AND classid=? ORDER BY dept ASC, coursenum ASC"
 
     # fetching professors if any
@@ -53,9 +56,8 @@ def handleDetails(sock, cursor, package):
 
     cursor.execute(sql_command1, args.classid)
     row = cursor.fetchone()
-    # delete later
-    print(row)
 
+    # not sure if we need this anymore
     if row is None:
         print(f"{argv[0]}: no class with classid " +
               str(args.classid[0]) + " exists", file=stderr)
@@ -63,49 +65,48 @@ def handleDetails(sock, cursor, package):
 
     firstrow = row
     courseid = str(row[0])
-    wrapper = textwrap.TextWrapper(
-        width=72, break_long_words=False)
-    wrapper_spec = textwrap.TextWrapper(
-        width=72)
-    print(wrapper.fill(f"Course Id: {courseid}"))
-    print()
-    print(f"Days: {str(row[1])}")
-    print(f"Start time: {str(row[2])}")
-    print(f"End time: {str(row[3])}")
-    print(f"Building: {str(row[4])}")
-    print(f"Room: {str(row[5])}")
-    print()
-    print(wrapper.fill(f"Dept and Number: {str(row[6])} {str(row[7])}"))
+
+    # wrapper = textwrap.TextWrapper(
+    #    width=72, break_long_words=False)
+    # wrapper_spec = textwrap.TextWrapper(
+    #    width=72)
+
+    message += f"Course Id: {courseid}"
+    message += '\n'
+    message += f"Days: {str(row[1])}"
+    message += f"Start time: {str(row[2])}"
+    message += f"End time: {str(row[3])}"
+    message += f"Building: {str(row[4])}"
+    message += f"Room: {str(row[5])}"
+    message += '\n'
+    message += f"Dept and Number: {str(row[6])} {str(row[7])}"
 
     row = cursor.fetchone()
-    # delete later
-    print(row)
     while row is not None:
-        print(wrapper.fill(f"Dept and Number: {str(row[6])} {str(row[7])}"))
+        message += f"Dept and Number: {str(row[6])} {str(row[7])}"
         row = cursor.fetchone()
-        # delete later
-        print(row)
 
-    print()
+    message += '\n'
     # print(wrapper.fill("Area: " + str(firstrow[8])))
-    print(f"Area: {str(firstrow[8])}")
-    print()
-    print(wrapper.fill(f"Title: {str(firstrow[9])}"))
-    print()
-    print(wrapper.fill(f"Description: {str(firstrow[10])}"))
-    print()
-    print(wrapper_spec.fill(f"Prerequisites: {str(firstrow[11])}"))
-    print()
+    message += f"Area: {str(firstrow[8])}"
+    message += '\n'
+    message += f"Title: {str(firstrow[9])}"
+    message += '\n'
+    message += f"Description: {str(firstrow[10])}"
+    message += '\n'
+    message += f"Prerequisites: {str(firstrow[11])}"
+    message += '\n'
 
     cursor.execute(sql_command2, [courseid])
     row = cursor.fetchone()
-    # delete later
-    print(row)
     while row is not None:
-        print(f"Professor: {str(row[0])}")
+        message += f"Professor: {str(row[0])}"
         row = cursor.fetchone()
-        # delete later
-        print(row)
+
+    out_flow = sock.makefile(mode="wb")
+    rows = cursor.fetchall()
+    dump(message, out_flow)
+    out_flow.flush()
 
 
 def main(argv):

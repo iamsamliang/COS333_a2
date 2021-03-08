@@ -68,6 +68,30 @@ def main(argv):
             # automatically highlight first row each time
             list_box.setCurrentRow(0)
 
+        def retrieveDetails():
+            # get the courseId from the selection
+            selection = list_box.selectedItems()
+            selection = selection[0]
+            words = selection.split()
+            class_id = words[0]
+
+            # send the values to regserver.py
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(class_id, out_flow)
+            out_flow.flush()
+
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            message = load(in_flow)
+
+            # close connection
+            sock.close()
+
+            # create and display information via messageBox
+            msgBox = QMessageBox.information(window, 'Class Details', message)
+
         # get the host and port
         host = argv[1]
         port = int(argv[2])
