@@ -12,7 +12,7 @@ from PyQt5.QtWidgets import QLabel, QGridLayout, QPushButton, QVBoxLayout, QForm
 from PyQt5.QtWidgets import QLineEdit, QTextEdit, QScrollArea
 from PyQt5.QtWidgets import QSlider, QCheckBox, QRadioButton
 from PyQt5.QtWidgets import QListWidget, QDesktopWidget
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QEnterEvent
 from PyQt5.QtCore import Qt
 import argparse
 import textwrap
@@ -57,6 +57,7 @@ def main(argv):
 
             # close connection
             sock.close()
+
             # clear list box and put appropriate items
             list_box.clear()
             for row in db_rows:
@@ -75,6 +76,7 @@ def main(argv):
         deptLab = QLabel("Dept: ")
         deptLab.setAlignment(Qt.AlignRight)
         deptLine = QLineEdit()
+        # deptLine.keyPressEvent(QKeyEvent())
         courseLab = QLabel("Number: ")
         courseLab.setAlignment(Qt.AlignRight)
         courseNumLine = QLineEdit()
