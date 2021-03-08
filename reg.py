@@ -13,7 +13,7 @@ from PyQt5.QtWidgets import QLineEdit, QTextEdit, QScrollArea
 from PyQt5.QtWidgets import QSlider, QCheckBox, QRadioButton
 from PyQt5.QtWidgets import QListWidget, QDesktopWidget
 from PyQt5.QtGui import QFont, QEnterEvent
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QItemSelectionModel
 import argparse
 import textwrap
 from database_handler import create_sql_command
@@ -64,8 +64,9 @@ def main(argv):
                 line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
                     str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
                 list_box.addItem(line_string)
-                # automatically highlight first row each time
-                list_box.setCurrentRow(0)
+
+            # automatically highlight first row each time
+            list_box.setCurrentRow(0, QItemSelectionModel.ClearAndSelect)
 
         # get the host and port
         host = argv[1]
@@ -131,8 +132,9 @@ def main(argv):
             line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
                 str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
             list_box.addItem(line_string)
-            # automatically highlight first row each time
-            list_box.setCurrentRow(0)
+
+        # automatically highlight first row each time
+        list_box.setCurrentRow(0, QItemSelectionModel.ClearAndSelect)
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
