@@ -64,43 +64,31 @@ def handleDetails(sock, cursor, args):
     firstrow = row
     courseid = str(row[0])
 
-    # wrapper = textwrap.TextWrapper(
-    #    width=72, break_long_words=False)
-    # wrapper_spec = textwrap.TextWrapper(
-    #    width=72)
-    message += f"Course Id: {courseid}"
-    message += '\n'
-    message += f"Days: {str(row[1])}"
-    message += f"Start time: {str(row[2])}"
-    message += f"End time: {str(row[3])}"
-    message += f"Building: {str(row[4])}"
-    message += f"Room: {str(row[5])}"
-    message += '\n'
-    message += f"Dept and Number: {str(row[6])} {str(row[7])}"
+    message += f"Course Id: {courseid}\n\n"
+    message += f"Days: {str(row[1])}\n"
+    message += f"Start time: {str(row[2])}\n"
+    message += f"End time: {str(row[3])}\n"
+    message += f"Building: {str(row[4])}\n"
+    message += f"Room: {str(row[5])}\n"
+    message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
 
     row = cursor.fetchone()
     while row is not None:
-        # delete later
-        print("momma's first while loop")
-        message += f"Dept and Number: {str(row[6])} {str(row[7])}"
+        message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
         row = cursor.fetchone()
 
     message += '\n'
     # print(wrapper.fill("Area: " + str(firstrow[8])))
-    message += f"Area: {str(firstrow[8])}"
-    message += '\n'
-    message += f"Title: {str(firstrow[9])}"
-    message += '\n'
-    message += f"Description: {str(firstrow[10])}"
-    message += '\n'
-    message += f"Prerequisites: {str(firstrow[11])}"
-    message += '\n'
+    message += f"Area: {str(firstrow[8])}\n\n"
+    message += f"Title: {str(firstrow[9])}\n\n"
+    message += f"Description: {str(firstrow[10])}\n\n"
+    message += f"Prerequisites: {str(firstrow[11])}\n\n"
 
     cursor.execute(sql_command2, [courseid])
     row = cursor.fetchone()
     while row is not None:
         print("In the second while loop")
-        message += f"Professor: {str(row[0])}"
+        message += f"Professor: {str(row[0])}\n"
         row = cursor.fetchone()
 
     out_flow = sock.makefile(mode="wb")
