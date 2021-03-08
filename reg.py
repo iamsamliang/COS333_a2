@@ -111,7 +111,7 @@ def main(argv):
         # and prints to user
         for row in db_rows:
             line_string = "{:>5}{:>4} {:>6} {:>4} {}".format(
-                str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
+                str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
             list_box.addItem(line_string)
 
         top_layout = QGridLayout()
