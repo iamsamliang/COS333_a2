@@ -70,11 +70,11 @@ def main(argv):
 
         def retrieveDetails():
             # get the courseId from the selection
-            selectedRow = list_box.selectedItems()
-            print(selectedRow)
-            selection = selectedRow[0]
-            print(selection)
-            words = selection.split()
+            selected_str = str(list_box.currentItem())
+            print(selected_str)
+            # selection = selectedRow[0]
+            # print(selection)
+            words = selected_str.split()
             print(words)
             class_id = words[0]
             print(class_id)
