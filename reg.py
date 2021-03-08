@@ -65,6 +65,9 @@ def main(argv):
                     str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
                 list_box.addItem(line_string)
 
+            # automatically highlight first row each time
+            list_box.setCurrentRow(0)
+
         # get the host and port
         host = argv[1]
         port = int(argv[2])
@@ -129,6 +132,9 @@ def main(argv):
             line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
                 str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
             list_box.addItem(line_string)
+
+        # automatically highlight first row each time
+        list_box.setCurrentRow(0)
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
