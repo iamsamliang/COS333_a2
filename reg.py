@@ -112,7 +112,7 @@ def main(argv):
         for row in db_rows:
             line_string = "{:>6} {:>4} {:>6} {:>4} {}".format(
                 str(row[0]), str(row[1]), str(row[2]), str(row[3]), str(row[4]))
-            list_box.addItem(row)
+            list_box.addItem(line_string)
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
