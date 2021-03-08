@@ -66,7 +66,7 @@ def main(argv):
                 list_box.addItem(line_string)
 
             # automatically highlight first row each time
-            list_box.setCurrentRow(0, QItemSelectionModel.ClearAndSelect)
+            list_box.setCurrentRow(0, QItemSelectionModel.Toggle)
 
         # get the host and port
         host = argv[1]
@@ -134,7 +134,7 @@ def main(argv):
             list_box.addItem(line_string)
 
         # automatically highlight first row each time
-        list_box.setCurrentRow(0, QItemSelectionModel.ClearAndSelect)
+        list_box.setCurrentRow(0)
 
         top_layout = QGridLayout()
         top_layout.setSpacing(0)
