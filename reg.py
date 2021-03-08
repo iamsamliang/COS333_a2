@@ -12,6 +12,7 @@ from PyQt5.QtWidgets import QLabel, QGridLayout, QPushButton, QVBoxLayout, QForm
 from PyQt5.QtWidgets import QLineEdit, QTextEdit, QScrollArea
 from PyQt5.QtWidgets import QSlider, QCheckBox, QRadioButton
 from PyQt5.QtWidgets import QListWidget, QDesktopWidget
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 import argparse
 import textwrap
@@ -80,6 +81,7 @@ def main(argv):
 
         # list box that can scroll vertically and horizontally
         list_box = QListWidget()
+        list_box.setFont(QFont("Courier", 10))
 
         # submit button
         submit_but = QPushButton("Submit")
@@ -110,7 +112,7 @@ def main(argv):
         # user interface: gets information from the database
         # and prints to user
         for row in db_rows:
-            line_string = "{:>5}{:>4} {:>6} {:>4} {}".format(
+            line_string = "{:>5} {:>4} {:>6} {:>4} {}".format(
                 str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
             list_box.addItem(line_string)
 
