@@ -41,23 +41,20 @@ def handleOverviews(sock, cursor, args):
 
 
 # handle getDetails
-def handleDetails(sock, cursor, package):
+def handleDetails(sock, cursor, args):
     print("Received command: getDetails")
 
     message = ""
+
     sql_command1 = "SELECT classes.courseid, classes.days, classes.starttime, classes.endtime, classes.bldg, classes.roomnum, crosslistings.dept, crosslistings.coursenum, courses.area, courses.title, courses.descrip, courses.prereqs FROM classes, crosslistings, courses WHERE classes.courseid = courses.courseid AND crosslistings.courseid = courses.courseid AND classid=? ORDER BY dept ASC, coursenum ASC"
 
     # fetching professors if any
     sql_command2 = "SELECT profs.profname FROM coursesprofs, profs WHERE coursesprofs.courseid=? AND coursesprofs.profid=profs.profid ORDER BY profname"
 
-    # get the arguments from the client and load them into args
-    flo = sock.makefile(mode="rb")
-    args = load(flo)
-
-    cursor.execute(sql_command1, args.classid)
+    cursor.execute(sql_command1, args[1])
     row = cursor.fetchone()
 
-    # not sure if we need this anymore
+    # if classid does not exist
     if row is None:
         print(f"{argv[0]}: no class with classid " +
               str(args.classid[0]) + " exists", file=stderr)
@@ -104,7 +101,6 @@ def handleDetails(sock, cursor, package):
         row = cursor.fetchone()
 
     out_flow = sock.makefile(mode="wb")
-    rows = cursor.fetchall()
     dump(message, out_flow)
     out_flow.flush()
 

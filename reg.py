@@ -70,16 +70,21 @@ def main(argv):
 
         def retrieveDetails():
             # get the courseId from the selection
-            selection = list_box.selectedItems()
-            selection = selection[0]
+            selectedRow = list_box.selectedItems()
+            print(selectedRow)
+            selection = selectedRow[0]
+            print(selection)
             words = selection.split()
+            print(words)
             class_id = words[0]
+            print(class_id)
+            packet = ["details", class_id]
 
             # send the values to regserver.py
             sock = socket()
             sock.connect((host, port))
             out_flow = sock.makefile(mode='wb')
-            dump(class_id, out_flow)
+            dump(packet, out_flow)
             out_flow.flush()
 
             # retrieve the values from regserver.py
@@ -129,6 +134,9 @@ def main(argv):
 
         # retrieve values when submit button is clicked
         submit_but.clicked.connect(retrieveText)
+
+        # open details when user double clicks on a list widget item
+        list_box.itemDoubleClicked.connect(retrieveDetails)
 
         packet = ["overviews", "", "", "", ""]
 
