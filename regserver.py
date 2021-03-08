@@ -53,6 +53,8 @@ def handleDetails(sock, cursor, package):
 
     cursor.execute(sql_command1, args.classid)
     row = cursor.fetchone()
+    # delete later
+    print(row)
 
     if row is None:
         print(f"{argv[0]}: no class with classid " +
@@ -76,9 +78,13 @@ def handleDetails(sock, cursor, package):
     print(wrapper.fill(f"Dept and Number: {str(row[6])} {str(row[7])}"))
 
     row = cursor.fetchone()
+    # delete later
+    print(row)
     while row is not None:
         print(wrapper.fill(f"Dept and Number: {str(row[6])} {str(row[7])}"))
         row = cursor.fetchone()
+        # delete later
+        print(row)
 
     print()
     # print(wrapper.fill("Area: " + str(firstrow[8])))
@@ -93,9 +99,13 @@ def handleDetails(sock, cursor, package):
 
     cursor.execute(sql_command2, [courseid])
     row = cursor.fetchone()
+    # delete later
+    print(row)
     while row is not None:
         print(f"Professor: {str(row[0])}")
         row = cursor.fetchone()
+        # delete later
+        print(row)
 
 
 def main(argv):
