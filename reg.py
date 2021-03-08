@@ -57,6 +57,12 @@ def main(argv):
 
             # close connection
             sock.close()
+            # clear list box and put appropriate items
+            list_box.clear()
+            for row in db_rows:
+                line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
+                    str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
+                list_box.addItem(line_string)
 
         # get the host and port
         host = argv[1]
