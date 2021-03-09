@@ -198,6 +198,10 @@ def main(argv):
     screenSize = QDesktopWidget().screenGeometry()
     window.resize(screenSize.width()//2, screenSize.height()//2)
 
+    # show the window
+    window.show()
+    exit(app.exec_())
+
     while True:
         try:
             # retrieve values when enter is clicked in one of the line edits
@@ -242,10 +246,6 @@ def main(argv):
 
                 # automatically highlight first row each time
                 list_box.setCurrentRow(0)
-
-            # show the window
-            window.show()
-            exit(app.exec_())
         except Exception as e:
             # display error of unavailable server
             msgBox = QMessageBox.critical(
