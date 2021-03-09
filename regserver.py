@@ -174,6 +174,15 @@ def main(argv):
                 dump(message, out_flow)
                 out_flow.flush()
 
+                # close database cconnection
+                cursor.close()
+                connection.close()
+                print("Closed Database Connection")
+
+                # close socket
+                sock.close()
+                print('Closed socket')
+
     # triggers when we endure an unavailable port error
     except Exception as e:
         print(f'{argv[0]}: {e}', file=stderr)
