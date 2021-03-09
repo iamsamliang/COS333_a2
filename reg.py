@@ -45,19 +45,23 @@ def main(argv):
         packet = ["overviews", dept, course_num, area, title]
 
         # send the values to regserver.py
-        sock = socket()
-        sock.connect((host, port))
-        out_flow = sock.makefile(mode='wb')
-        dump(packet, out_flow)
-        out_flow.flush()
+        try:
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
 
-        # retrieve the values from regserver.py
-        in_flow = sock.makefile(mode='rb')
-        isSuccess = load(in_flow)
-        db_rows = load(in_flow)
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            isSuccess = load(in_flow)
+            db_rows = load(in_flow)
 
-        # close connection
-        sock.close()
+            # close connection
+            sock.close()
+            
+        except:
+            isSuccess = False
 
         if not isSuccess:
             msgBox = QMessageBox.critical(
