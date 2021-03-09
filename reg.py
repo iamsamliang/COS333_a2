@@ -193,9 +193,6 @@ def main(argv):
     screenSize = QDesktopWidget().screenGeometry()
     window.resize(screenSize.width()//2, screenSize.height()//2)
 
-    window.show()
-    exit(app.exec_())
-
     while True:
         try:
             # retrieve values when enter is clicked in one of the line edits
@@ -237,6 +234,9 @@ def main(argv):
             list_box.setCurrentRow(0)
         except Exception as e:
             print(f'{argv[0]}: {e}', file=stderr)
+
+    window.show()
+    exit(app.exec_())
 
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
