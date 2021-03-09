@@ -198,10 +198,6 @@ def main(argv):
     screenSize = QDesktopWidget().screenGeometry()
     window.resize(screenSize.width()//2, screenSize.height()//2)
 
-    # show the window
-    window.show()
-    exit(app.exec_())
-
     while True:
         try:
             # retrieve values when enter is clicked in one of the line edits
