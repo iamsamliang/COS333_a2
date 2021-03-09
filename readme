@@ -9,10 +9,8 @@ pyqt5 documentation, python socket documentation,
 lectures on database, GUI, and servers along with their example code
 Hours spent: 20 hours
 
-Sam Contributions: Created the base template for the assignment code and did research on argparse and textwrap modules. Also created the try and while loops in the reg.py and regdetails.py 
-modules and did the majority of the work with the textwrapper. Created the majority of the sql
-prepared statements and conceptualized the stress testing modules. Also handled cases for special characters so that sql would interpret _ and % as characters instead of special characters by writing the special_char_mod function. Utilized the argparse object to get -h functionality, add command line arguments, and grab the argument values. Wrote code to handle the different cases when certain arguments are passed in and adding proper SQL statements to the running SQL prepared statement. For regdetails.py, did similar things and added the code to grab professor names separately because some courses have no professors. Did testing w/ Sumanth on reg.py and regdetails.py
+Sam Contributions:
 
-Sumanth Partner contributions: Created the majority of the print statements and ran the majority of debugging statements. Responsible for most of the table formatting and error statements in both files, as well as the majority of the statement tests and stress testing modules. Handled most of the commenting and exception statement prints. Also responsible for generating the m coverage reports and most of the readme. Did the testing equally with Sam on reg.py and regdetails.py
+Sumanth Partner contributions:
 
 Suggestions:
