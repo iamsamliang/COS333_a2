@@ -159,10 +159,16 @@ def main(argv):
                     sock.close()
                     print('Closed socket')
             except Exception as e:
-                print(e, file=stderr)
+                print(f'{argv[0]}: {e}', file=stderr)
+                message = "A server error occurred. Please contact the system administrator."
+                out_flow = sock.makefile(mode="wb")
+                isSuccess = False
+                dump(isSuccess, out_flow)
+                dump(message, out_flow)
+                out_flow.flush()
 
     except Exception as e:
-        print(e, file=stderr)
+        print(f'{argv[0]}: {e}', file=stderr)
         exit(1)
 
 
