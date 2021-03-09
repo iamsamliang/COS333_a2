@@ -318,8 +318,8 @@ def main(argv):
 # (missing table, missing field, etc.) such that a database query
 # performed by reg.py throws an exception, then reg.py must write
 # the message that is within that exception to stderr. exit status 1
-    except Exception as e:
-        print(f'{argv[0]}: {e}', file=stderr)
+    # except Exception as e:
+    #     print(f'{argv[0]}: {e}', file=stderr)
 
 
 if __name__ == '__main__':
