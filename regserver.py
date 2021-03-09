@@ -147,6 +147,7 @@ def main(argv):
 
                     # close socket
                     sock.close()
+                    print('Closed socket')
                 else:
                     # connect to database
                     connection = connect(DATABASE_NAME)
