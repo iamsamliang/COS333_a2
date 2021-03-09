@@ -106,7 +106,7 @@ def main(argv):
         if not isSuccess:
             # display error with classid not existing in database
             msgBox = QMessageBox.critical(
-                window, 'Class Details Error', message)
+                window, 'Server Error', message)
         else:
             # create and display information via messageBox
             msgBox = QMessageBox.information(

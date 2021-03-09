@@ -91,7 +91,10 @@ def handleDetails(sock, cursor, args):
         message += f"Description: {str(firstrow[10])}\n\n"
         message += f"Prerequisites: {str(firstrow[11])}\n\n"
 
+        # remove later
+        print("reached second execute")
         cursor.execute(sql_command2, [courseid])
+        print("finished second execute successfully")
         row = cursor.fetchone()
         while row is not None:
             message += f"Professor: {str(row[0])}\n"
@@ -158,11 +161,20 @@ def main(argv):
                     # close socket
                     sock.close()
                     print('Closed socket')
-            except Exception as e:
-                print(e, file=stderr)
 
+            # server error exception       
+            except Exception as e:
+                print(f'{argv[0]}: {e}', file=stderr)
+                message = "A server error occurred. Please contact the system administrator."
+                out_flow = sock.makefile(mode="wb")
+                isSuccess = False
+                dump(isSuccess, out_flow)
+                dump(message, out_flow)
+                out_flow.flush()
+
+    # I can cause this code to execute only by making the client erroneous.
     except Exception as e:
-        print(e, file=stderr)
+        print(f'{argv[0]}: {e}', file=stderr)
         exit(1)
 
 
