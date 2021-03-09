@@ -247,11 +247,14 @@ def main(argv):
                 # automatically highlight first row each time
                 list_box.setCurrentRow(0)
                 window.show()
+                exit(app.exec_())
+
         except Exception as e:
             # display error of unavailable server
             msgBox = QMessageBox.critical(
                 window, 'Server Error', str(e))
             window.show()
+            exit(app.exec_())
 
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
