@@ -320,7 +320,6 @@ def main(argv):
 # the message that is within that exception to stderr. exit status 1
     except Exception as e:
         print(f'{argv[0]}: {e}', file=stderr)
-        exit(1)
 
 
 if __name__ == '__main__':
