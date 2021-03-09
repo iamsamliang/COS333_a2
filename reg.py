@@ -53,20 +53,25 @@ def main(argv):
 
         # retrieve the values from regserver.py
         in_flow = sock.makefile(mode='rb')
+        isSuccess = load(in_flow)
         db_rows = load(in_flow)
 
         # close connection
         sock.close()
 
-        # clear list box and put appropriate items
-        list_box.clear()
-        for row in db_rows:
-            line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
-                str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
-            list_box.addItem(line_string)
+        if not isSuccess:
+            msgBox = QMessageBox.critical(
+                window, 'Database Unavailable', db_rows)
+        else:
+            # clear list box and put appropriate items
+            list_box.clear()
+            for row in db_rows:
+                line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
+                    str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
+                list_box.addItem(line_string)
 
-        # automatically highlight first row each time
-        list_box.setCurrentRow(0)
+            # automatically highlight first row each time
+            list_box.setCurrentRow(0)
 
     def retrieveDetails():
         # get the courseId from the selection
