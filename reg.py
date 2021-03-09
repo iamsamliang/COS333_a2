@@ -62,11 +62,11 @@ def main(argv):
 
         except:
             isSuccess = False
-            db_rows = "[Errno 111]Connection refused"
+            db_rows = "[Errno 111] Connection refused"
 
         if not isSuccess:
             msgBox = QMessageBox.critical(
-                window, 'Database Unavailable', db_rows)
+                window, 'Server Error', db_rows)
         else:
             # clear list box and put appropriate items
             list_box.clear()
