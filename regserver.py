@@ -158,6 +158,8 @@ def main(argv):
                     # close socket
                     sock.close()
                     print('Closed socket')
+
+            # server error exception       
             except Exception as e:
                 print(f'{argv[0]}: {e}', file=stderr)
                 message = "A server error occurred. Please contact the system administrator."
@@ -167,6 +169,7 @@ def main(argv):
                 dump(message, out_flow)
                 out_flow.flush()
 
+    # I can cause this code to execute only by making the client erroneous.
     except Exception as e:
         print(f'{argv[0]}: {e}', file=stderr)
         exit(1)
