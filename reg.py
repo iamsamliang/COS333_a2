@@ -75,7 +75,6 @@ def main(argv):
             # print(selection)
             words = selected_str.split()
             class_id = int(words[0])
-            print(class_id)
             packet = ["details", class_id]
 
             # send the values to regserver.py

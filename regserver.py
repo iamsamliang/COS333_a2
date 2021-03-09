@@ -51,7 +51,6 @@ def handleDetails(sock, cursor, args):
     # fetching professors if any
     sql_command2 = "SELECT profs.profname FROM coursesprofs, profs WHERE coursesprofs.courseid=? AND coursesprofs.profid=profs.profid ORDER BY profname"
 
-    print("args[1] value: " + str(args[1]))
     cursor.execute(sql_command1, [args[1]])
     row = cursor.fetchone()
 
@@ -87,7 +86,6 @@ def handleDetails(sock, cursor, args):
     cursor.execute(sql_command2, [courseid])
     row = cursor.fetchone()
     while row is not None:
-        print("In the second while loop")
         message += f"Professor: {str(row[0])}\n"
         row = cursor.fetchone()
 
