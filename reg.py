@@ -132,16 +132,6 @@ def main(argv):
     # submit button
     submit_but = QPushButton("Submit")
 
-    # user interface: gets information from the database
-    # and prints to user
-    for row in db_rows:
-        line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
-            str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
-        list_box.addItem(line_string)
-
-    # automatically highlight first row each time
-    list_box.setCurrentRow(0)
-
     top_layout = QGridLayout()
     top_layout.setSpacing(0)
     top_layout.setContentsMargins(0, 0, 0, 0)
@@ -235,6 +225,16 @@ def main(argv):
 
             # close connection
             sock.close()
+
+            # user interface: gets information from the database
+            # and prints to user
+            for row in db_rows:
+                line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
+                    str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
+                list_box.addItem(line_string)
+
+            # automatically highlight first row each time
+            list_box.setCurrentRow(0)
         except Exception as e:
             print(f'{argv[0]}: {e}', file=stderr)
 
