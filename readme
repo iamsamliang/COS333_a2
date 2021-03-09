@@ -1,0 +1,16 @@
+saml_
+Assignment Number: 2
+Name: Sam Liang
+Partner Name: Sumanth Maddirala
+Assistance: Visited Willie, Dondero Office Hours
+Sources used: Course site (lectures, slides, handouts), 
+argparse manual (https://docs.python.org/3/library/argparse.html), 
+pyqt5 documentation, python socket documentation,
+lectures on database, GUI, and servers along with their example code
+Hours spent: 20 hours
+
+Sam Contributions: Sam wrote the code for the argparse and also most of the functions communicating with the database (handler, handleOverviews, handleDetails). He also wrote the code for socket connection between regserver.py and reg.py along with the flow of information between the socket and closing the socket. He also did the GUI interface and putting all the widgets in the correct position and right font and that the list entries in the list box were highlighted. He also wrote the retreiveText method and all the code for detecting clicks and input and connecting them to the write function. He also wrote the code for making sure reg.py doesn't end when it encounters certain errors.
+
+Sumanth Partner contributions:
+
+Suggestions:

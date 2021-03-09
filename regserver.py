@@ -102,7 +102,7 @@ def handleDetails(sock, cursor, args):
         isSuccess = True
         dump(isSuccess, out_flow)
         dump(message, out_flow)
-        out_flow.flush()
+        out_flow.flush()  # if client crashes before flushing
 
 
 def main(argv):
@@ -122,7 +122,7 @@ def main(argv):
         serverSock = socket()
         print('Opened server socket')
         serverSock.setsockopt(SOL_SOCKET, SO_REUSEADDR, 1)
-        serverSock.bind(('', port))
+        serverSock.bind(('', port))  # can trigger unavailable port error
         print("Bound server socket to port")
         serverSock.listen()
         print('Listening')
@@ -142,6 +142,10 @@ def main(argv):
                     dump(isSuccess, out_flow)
                     dump(message, out_flow)
                     out_flow.flush()
+
+                    # close socket
+                    sock.close()
+                    print('Closed socket')
                 else:
                     # connect to database
                     connection = connect(DATABASE_NAME)
@@ -160,7 +164,7 @@ def main(argv):
                     sock.close()
                     print('Closed socket')
 
-            # server error exception       
+            # server error exception
             except Exception as e:
                 print(f'{argv[0]}: {e}', file=stderr)
                 message = "A server error occurred. Please contact the system administrator."
