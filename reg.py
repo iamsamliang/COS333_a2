@@ -232,11 +232,12 @@ def main(argv):
 
             # automatically highlight first row each time
             list_box.setCurrentRow(0)
+
+            # show the window
+            window.show()
+            exit(app.exec_())
         except Exception as e:
             print(f'{argv[0]}: {e}', file=stderr)
-
-    window.show()
-    exit(app.exec_())
 
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
