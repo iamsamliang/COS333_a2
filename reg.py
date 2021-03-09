@@ -59,9 +59,10 @@ def main(argv):
 
             # close connection
             sock.close()
-            
+
         except:
             isSuccess = False
+            db_rows = []
 
         if not isSuccess:
             msgBox = QMessageBox.critical(
