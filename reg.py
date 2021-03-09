@@ -112,22 +112,18 @@ def main(argv):
     deptLab = QLabel("Dept: ")
     deptLab.setAlignment(Qt.AlignRight)
     deptLine = QLineEdit()
-    deptLine.returnPressed.connect(retrieveText)
 
     courseLab = QLabel("Number: ")
     courseLab.setAlignment(Qt.AlignRight)
     courseNumLine = QLineEdit()
-    courseNumLine.returnPressed.connect(retrieveText)
 
     areaLab = QLabel("Area: ")
     areaLab.setAlignment(Qt.AlignRight)
     areaLine = QLineEdit()
-    areaLine.returnPressed.connect(retrieveText)
 
     titleLab = QLabel("Title: ")
     titleLab.setAlignment(Qt.AlignRight)
     titleLine = QLineEdit()
-    titleLine.returnPressed.connect(retrieveText)
 
     # list box that can scroll vertically and horizontally
     list_box = QListWidget()
@@ -135,32 +131,6 @@ def main(argv):
 
     # submit button
     submit_but = QPushButton("Submit")
-
-    # retrieve values when submit button is clicked
-    submit_but.clicked.connect(retrieveText)
-
-    # open details when user double clicks or hits enter on a list widget item
-    list_box.itemActivated.connect(retrieveDetails)
-
-    packet = ["overviews", "", "", "", ""]
-
-    # send the values to regserver.py
-    sock = socket()
-    print(sock.connect((host, port)))
-    out_flow = sock.makefile(mode='wb')
-    dump(packet, out_flow)
-    out_flow.flush()
-
-    # retrieve the values from regserver.py
-    in_flow = sock.makefile(mode='rb')
-    db_rows = load(in_flow)
-
-    # close connection
-    sock.close()
-
-    # user interface (prints table layout)
-    # wrapper = textwrap.TextWrapper(
-    #     width=72, break_long_words=False, subsequent_indent=(23 * ' '))
 
     # user interface: gets information from the database
     # and prints to user
@@ -227,69 +197,6 @@ def main(argv):
     centralFrame = QFrame()
     centralFrame.setLayout(centralFrameLayout)
 
-    # ---------------------------------------------------
-
-    # outer_layout = QVBoxLayout()
-    # outer_layout.setSpacing(0)
-    # outer_layout.setContentsMargins(0, 0, 0, 0)
-
-    # top_layout = QHBoxLayout()
-    # top_layout.setSpacing(0)
-    # top_layout.setContentsMargins(0, 0, 0, 0)
-    # top_layout.setStretch(0, 0)
-    # top_layout.setStretch(1, 1)
-    # top_layout.setStretch(2, 0)
-
-    # top_layout_left = QVBoxLayout()
-    # top_layout_left.setAlignment(Qt.AlignRight)
-    # top_layout_left.addWidget(deptLab)
-    # courseLab.setAlignment(Qt.AlignRight)
-    # top_layout_left.addWidget(courseLab)
-    # areaLab.setAlignment(Qt.AlignRight)
-    # top_layout_left.addWidget(areaLab)
-    # titleLab.setAlignment(Qt.AlignRight)
-    # top_layout_left.addWidget(titleLab)
-    # # top_layout_left.addRow("Dept: ", deptLine)
-    # # top_layout_left.addRow("Number: ", courseNumLine)
-    # # top_layout_left.addRow("Area: ", areaLine)
-    # # top_layout_left.addRow("Title: ", titleLine)
-
-    # top_layout_middle = QVBoxLayout()
-    # top_layout_middle.addWidget(deptLine)
-    # top_layout_middle.addWidget(courseNumLine)
-    # top_layout_middle.addWidget(areaLine)
-    # top_layout_middle.addWidget(titleLine)
-
-    # top_layout_right = QVBoxLayout()
-    # top_layout_right.setAlignment(Qt.AlignRight)
-    # top_layout_right.addWidget(submit_but)
-
-    # top_layout.addLayout(top_layout_left)
-    # top_layout.addLayout(top_layout_middle)
-    # top_layout.addLayout(top_layout_right)
-
-    # list_layout = QVBoxLayout()
-    # list_layout.addWidget(list_box)
-
-    # outer_layout.addLayout(top_layout)
-    # outer_layout.addLayout(list_layout)
-    # # layout.addWidget(deptLab)
-    # # layout.addWidget(courseLab)
-    # # layout.addWidget(areaLab)
-    # # layout.addWidget(titleLab)
-    # # layout.addWidget(deptLine)
-    # # layout.addWidget(courseLab, 1, 0)
-    # # layout.addWidget(courseNumLine, 1, 1)
-    # # layout.addWidget(areaLab, 2, 0)
-    # # layout.addWidget(areaLab, 2, 1)
-    # # layout.addWidget(titleLab, 3, 0)
-    # # layout.addWidget(titleLab, 3, 1)
-    # # layout.addWidget(list_box, 4, 0)
-    # # layout.addWidget(submit_but, 4, 1)
-
-    # frame = QFrame()
-    # frame.setLayout(outer_layout)
-
     window = QMainWindow()
     window.setWindowTitle('Princeton University Class Search')
     window.setCentralWidget(centralFrame)
@@ -299,19 +206,38 @@ def main(argv):
     window.show()
     exit(app.exec_())
 
-    # when the user opens the application or has nothing in the input boxes, we need to display all classes in order of classid, department, coursenum, area, title. must have table format
+    while True:
+        try:
+            # retrieve values when enter is clicked in one of the line edits
+            deptLine.returnPressed.connect(retrieveText)
+            courseNumLine.returnPressed.connect(retrieveText)
+            areaLine.returnPressed.connect(retrieveText)
+            titleLine.returnPressed.connect(retrieveText)
 
-    # when the user hits the submit button, we need to extract the input arguments and list all the classes that match those criteria. Use reg.py to get the list of entries
+            # retrieve values when submit button is clicked
+            submit_but.clicked.connect(retrieveText)
 
-    # in the list box, must default highlight the first entry before any user clicks
-    # when the user single clicks on an entry, we need to highlight it
-    # when the user double clicks on an entry, we need to display details about the class in a popup and format it. Use regdetails.py to display the correct information
+            # open details when user double clicks or hits enter on a list widget item
+            list_box.itemActivated.connect(retrieveDetails)
 
-    # keyboard functionality
-    # cycle through the widgets with the tab key
-    # in the list box, use arrow keys to go up and down
-    # in the list box, hitting enter on a highlighted item opens it
-    # close the details box for a selected class item by hitting enter
+            packet = ["overviews", "", "", "", ""]
+
+            # send the values to regserver.py
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
+
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            db_rows = load(in_flow)
+
+            # close connection
+            sock.close()
+        except Exception as e:
+            print(f'{argv[0]}: {e}', file=stderr)
+
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
 # If some other program has corrupted the reg.sqlite database file
