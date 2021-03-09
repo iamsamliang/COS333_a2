@@ -206,7 +206,7 @@ def main(argv):
 
     window.show()
 
-    while False:
+    while True:
         try:
             # retrieve values when enter is clicked in one of the line edits
             deptLine.returnPressed.connect(retrieveText)
