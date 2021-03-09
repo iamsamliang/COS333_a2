@@ -254,7 +254,7 @@ def main(argv):
             # display error of unavailable server
             msgBox = QMessageBox.critical(
                 window, 'Server Error', str(e))
-            # window.show()
+            window.show()
             # exit(app.exec_())
 
 
