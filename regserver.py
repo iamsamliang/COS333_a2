@@ -36,6 +36,8 @@ def handleOverviews(sock, cursor, args):
     # then return cursor.fetchall (all rows from database) here using dump() and flush()
     out_flow = sock.makefile(mode="wb")
     rows = cursor.fetchall()
+    isSuccess = True
+    dump(isSuccess, out_flow)
     dump(rows, out_flow)
     out_flow.flush()
 
@@ -105,11 +107,6 @@ def handleDetails(sock, cursor, args):
 def main(argv):
     DATABASE_NAME = "reg.sqlite"
 
-    # user-interface code
-    if not path.isfile(DATABASE_NAME):
-        print(f'{argv[0]}: database reg.sqlite not found', file=stderr)
-        exit(1)
-
     # argparse is user-interface related code
     # Create parser that has a description of the program and host/port positional arguments
     parser = argparse.ArgumentParser(
@@ -134,22 +131,33 @@ def main(argv):
                 sock, client_addr = serverSock.accept()
                 print('Accepted connection, opened socket')
 
-                # connect to database
-                connection = connect(DATABASE_NAME)
-                cursor = connection.cursor()
-                print("Established Database Connection")
+                # make sure database exists
+                if not path.isfile(DATABASE_NAME):
+                    print(
+                        f'{argv[0]}: database reg.sqlite not found', file=stderr)
+                    message = "A server error occurred. Please contact the system administrator."
+                    out_flow = sock.makefile(mode="wb")
+                    isSuccess = False
+                    dump(isSuccess, out_flow)
+                    dump(message, out_flow)
+                    out_flow.flush()
+                else:
+                    # connect to database
+                    connection = connect(DATABASE_NAME)
+                    cursor = connection.cursor()
+                    print("Established Database Connection")
 
-                # Handle client request
-                handler(sock, cursor)
+                    # Handle client request
+                    handler(sock, cursor)
 
-                # close database connection
-                cursor.close()
-                connection.close()
-                print("Closed Database Connection")
+                    # close database connection
+                    cursor.close()
+                    connection.close()
+                    print("Closed Database Connection")
 
-                # close socket
-                sock.close()
-                print('Closed socket')
+                    # close socket
+                    sock.close()
+                    print('Closed socket')
             except Exception as e:
                 print(e, file=stderr)
 
