@@ -62,7 +62,7 @@ def main(argv):
 
         except:
             isSuccess = False
-            db_rows = []
+            db_rows = "Connection refused"
 
         if not isSuccess:
             msgBox = QMessageBox.critical(
