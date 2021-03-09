@@ -91,7 +91,10 @@ def handleDetails(sock, cursor, args):
         message += f"Description: {str(firstrow[10])}\n\n"
         message += f"Prerequisites: {str(firstrow[11])}\n\n"
 
+        # remove later
+        print("reached second execute")
         cursor.execute(sql_command2, [courseid])
+        print("finished second execute successfully")
         row = cursor.fetchone()
         while row is not None:
             message += f"Professor: {str(row[0])}\n"
@@ -161,6 +164,8 @@ def main(argv):
                     # close socket
                     sock.close()
                     print('Closed socket')
+
+            # server error exception
             except Exception as e:
                 print(f'{argv[0]}: {e}', file=stderr)
                 message = "A server error occurred. Please contact the system administrator."
