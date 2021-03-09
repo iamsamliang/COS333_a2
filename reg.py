@@ -62,7 +62,7 @@ def main(argv):
 
         except:
             isSuccess = False
-            db_rows = "Connection refused"
+            db_rows = "[Errno 111]Connection refused"
 
         if not isSuccess:
             msgBox = QMessageBox.critical(
