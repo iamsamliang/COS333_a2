@@ -86,13 +86,20 @@ def main(argv):
 
             # retrieve the values from regserver.py
             in_flow = sock.makefile(mode='rb')
+            isSuccess = load(in_flow)
             message = load(in_flow)
 
             # close connection
             sock.close()
 
-            # create and display information via messageBox
-            msgBox = QMessageBox.information(window, 'Class Details', message)
+            if not isSuccess:
+                # display error with classid not existing in database
+                msgBox = QMessageBox.critical(
+                    window, 'Class Details Error', message)
+            else:
+                # create and display information via messageBox
+                msgBox = QMessageBox.information(
+                    window, 'Class Details', message)
 
         # get the host and port
         host = argv[1]
@@ -139,7 +146,7 @@ def main(argv):
 
         # send the values to regserver.py
         sock = socket()
-        sock.connect((host, port))
+        print(sock.connect((host, port)))
         out_flow = sock.makefile(mode='wb')
         dump(packet, out_flow)
         out_flow.flush()

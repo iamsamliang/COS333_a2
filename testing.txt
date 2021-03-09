@@ -1,0 +1,12 @@
+python -m coverage run -p regserver.py 20000
+python -m coverage run -p reg.py courselab03.cs.princeton.edu 20000
+
+python -m coverage run -p reg.py courselab03.cs.princeton.edu 20000
+
+python -m coverage run -p regserver.py 20000
+python -m coverage run -p reg.py handleDetails(courselab03.cs.princeton.edu, 20000, 8321)
+
+python -m coverage run -p regserver.py 20000
+python -m coverage run -p regserver.py 20000
+
+python -m coverage run -p 

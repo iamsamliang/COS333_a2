@@ -45,6 +45,7 @@ def handleDetails(sock, cursor, args):
     print("Received command: getDetails")
 
     message = ""
+    isSuccess = False
 
     sql_command1 = "SELECT classes.courseid, classes.days, classes.starttime, classes.endtime, classes.bldg, classes.roomnum, crosslistings.dept, crosslistings.coursenum, courses.area, courses.title, courses.descrip, courses.prereqs FROM classes, crosslistings, courses WHERE classes.courseid = courses.courseid AND crosslistings.courseid = courses.courseid AND classid=? ORDER BY dept ASC, coursenum ASC"
 
@@ -54,44 +55,51 @@ def handleDetails(sock, cursor, args):
     cursor.execute(sql_command1, [args[1]])
     row = cursor.fetchone()
 
+    # If reg.py sends a "class details" query specifying a classid that does not exist in the database, then regserver.py must write a descriptive error message to its stderr and continue executing.
     # if classid does not exist
     if row is None:
         print(f"{argv[0]}: no class with classid " +
-              str(args.classid[0]) + " exists", file=stderr)
-        exit(1)
+              str(args[1]) + " exists", file=stderr)
+        message = "There exists no class with the classid: " + str(args[1])
+        out_flow = sock.makefile(mode="wb")
+        dump(isSuccess, out_flow)
+        dump(message, out_flow)
+        out_flow.flush()
+    else:
+        firstrow = row
+        courseid = str(row[0])
 
-    firstrow = row
-    courseid = str(row[0])
-
-    message += f"Course Id: {courseid}\n\n"
-    message += f"Days: {str(row[1])}\n"
-    message += f"Start time: {str(row[2])}\n"
-    message += f"End time: {str(row[3])}\n"
-    message += f"Building: {str(row[4])}\n"
-    message += f"Room: {str(row[5])}\n\n"
-    message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
-
-    row = cursor.fetchone()
-    while row is not None:
+        message += f"Course Id: {courseid}\n\n"
+        message += f"Days: {str(row[1])}\n"
+        message += f"Start time: {str(row[2])}\n"
+        message += f"End time: {str(row[3])}\n"
+        message += f"Building: {str(row[4])}\n"
+        message += f"Room: {str(row[5])}\n\n"
         message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
+
         row = cursor.fetchone()
+        while row is not None:
+            message += f"Dept and Number: {str(row[6])} {str(row[7])}\n"
+            row = cursor.fetchone()
 
-    message += '\n'
-    # print(wrapper.fill("Area: " + str(firstrow[8])))
-    message += f"Area: {str(firstrow[8])}\n\n"
-    message += f"Title: {str(firstrow[9])}\n\n"
-    message += f"Description: {str(firstrow[10])}\n\n"
-    message += f"Prerequisites: {str(firstrow[11])}\n\n"
+        message += '\n'
+        # print(wrapper.fill("Area: " + str(firstrow[8])))
+        message += f"Area: {str(firstrow[8])}\n\n"
+        message += f"Title: {str(firstrow[9])}\n\n"
+        message += f"Description: {str(firstrow[10])}\n\n"
+        message += f"Prerequisites: {str(firstrow[11])}\n\n"
 
-    cursor.execute(sql_command2, [courseid])
-    row = cursor.fetchone()
-    while row is not None:
-        message += f"Professor: {str(row[0])}\n"
+        cursor.execute(sql_command2, [courseid])
         row = cursor.fetchone()
+        while row is not None:
+            message += f"Professor: {str(row[0])}\n"
+            row = cursor.fetchone()
 
-    out_flow = sock.makefile(mode="wb")
-    dump(message, out_flow)
-    out_flow.flush()
+        out_flow = sock.makefile(mode="wb")
+        isSuccess = True
+        dump(isSuccess, out_flow)
+        dump(message, out_flow)
+        out_flow.flush()
 
 
 def main(argv):
@@ -111,10 +119,6 @@ def main(argv):
     args = parser.parse_args()
 
     try:
-        # connect to database
-        connection = connect(DATABASE_NAME)
-        cursor = connection.cursor()
-
         # make this server bind a socket to this port and listen for a connection from a client
         port = int(argv[1])
         serverSock = socket()
@@ -129,14 +133,25 @@ def main(argv):
             try:
                 sock, client_addr = serverSock.accept()
                 print('Accepted connection, opened socket')
+
+                # connect to database
+                connection = connect(DATABASE_NAME)
+                cursor = connection.cursor()
+                print("Established Database Connection")
+
+                # Handle client request
                 handler(sock, cursor)
+
+                # close database connection
+                cursor.close()
+                connection.close()
+                print("Closed Database Connection")
+
+                # close socket
                 sock.close()
                 print('Closed socket')
             except Exception as e:
                 print(e, file=stderr)
-
-        cursor.close()
-        connection.close()
 
     except Exception as e:
         print(e, file=stderr)
