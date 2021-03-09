@@ -133,8 +133,8 @@ def main(argv):
         # retrieve values when submit button is clicked
         submit_but.clicked.connect(retrieveText)
 
-        # open details when user double clicks on a list widget item
-        list_box.itemDoubleClicked.connect(retrieveDetails)
+        # open details when user double clicks or hits enter on a list widget item
+        list_box.itemActivated.connect(retrieveDetails)
 
         packet = ["overviews", "", "", "", ""]
 
