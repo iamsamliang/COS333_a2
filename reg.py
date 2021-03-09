@@ -45,6 +45,7 @@ def main(argv):
         packet = ["overviews", dept, course_num, area, title]
 
         # send the values to regserver.py
+        # keep everything in a try loop in case multiple signals come in so doesn't terminate
         try:
             sock = socket()
             sock.connect((host, port))
@@ -205,7 +206,7 @@ def main(argv):
 
     window.show()
 
-    while True:
+    while False:
         try:
             # retrieve values when enter is clicked in one of the line edits
             deptLine.returnPressed.connect(retrieveText)
