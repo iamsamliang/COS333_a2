@@ -244,7 +244,7 @@ def main(argv):
         except Exception as e:
             # display error of unavailable server
             msgBox = QMessageBox.critical(
-                window, 'Server Error', e)
+                window, 'Server Error', str(e))
 
 
 # exit(2) case handled by arg_parse module, exit(1) case handled on lines 11-18
