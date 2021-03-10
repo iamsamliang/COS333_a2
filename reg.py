@@ -89,19 +89,24 @@ def main(argv):
         packet = ["details", class_id]
 
         # send the values to regserver.py
-        sock = socket()
-        sock.connect((host, port))
-        out_flow = sock.makefile(mode='wb')
-        dump(packet, out_flow)
-        out_flow.flush()
+        try:
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
 
-        # retrieve the values from regserver.py
-        in_flow = sock.makefile(mode='rb')
-        isSuccess = load(in_flow)
-        message = load(in_flow)
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            isSuccess = load(in_flow)
+            message = load(in_flow)
 
-        # close connection
-        sock.close()
+            # close connection
+            sock.close()
+
+        except:
+            isSuccess = False
+            message = "[Errno 111] Connection refused"
 
         if not isSuccess:
             # display error with classid not existing in database
@@ -220,38 +225,38 @@ def main(argv):
             # open details when user double clicks or hits enter on a list widget item
             list_box.itemActivated.connect(retrieveDetails)
 
-            retrieveText()
+            # retrieveText()
 
-            # packet = ["overviews", "", "", "", ""]
+            packet = ["overviews", "", "", "", ""]
 
-            # # send the values to regserver.py
-            # sock = socket()
-            # sock.connect((host, port))
-            # out_flow = sock.makefile(mode='wb')
-            # dump(packet, out_flow)
-            # out_flow.flush()
+            # send the values to regserver.py
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
 
-            # # retrieve the values from regserver.py
-            # in_flow = sock.makefile(mode='rb')
-            # isSuccess = load(in_flow)
-            # db_rows = load(in_flow)
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            isSuccess = load(in_flow)
+            db_rows = load(in_flow)
 
-            # # close connection
-            # sock.close()
+            # close connection
+            sock.close()
 
-            # if not isSuccess:
-            #     msgBox = QMessageBox.critical(
-            #         window, 'Database Unavailable', db_rows)
-            # else:
-            #     # user interface: gets information from the database
-            #     # and prints to user
-            #     for row in db_rows:
-            #         line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
-            #             str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
-            #         list_box.addItem(line_string)
+            if not isSuccess:
+                msgBox = QMessageBox.critical(
+                    window, 'Server Error', db_rows)
+            else:
+                # user interface: gets information from the database
+                # and prints to user
+                for row in db_rows:
+                    line_string = "{:>5}{:>4}{:>5}{:>4} {}".format(
+                        str(row[0]).strip(), str(row[1]).strip(), str(row[2]).strip(), str(row[3]).strip(), str(row[4]).strip())
+                    list_box.addItem(line_string)
 
-            # # automatically highlight first row each time
-            # list_box.setCurrentRow(0)
+            # automatically highlight first row each time
+            list_box.setCurrentRow(0)
 
             window.show()
             exit(app.exec_())
