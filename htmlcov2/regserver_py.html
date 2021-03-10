@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for regserver.py: 100%</title>
+    <title>Coverage for regserver.py: 85%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,13 +18,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>regserver.py</b> :
-            <span class="pc_cov">100%</span>
+            <span class="pc_cov">85%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             128 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">128 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">109 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">19 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
     </div>
@@ -114,13 +114,13 @@
     <p id="t60" class="pln"><span class="n"><a href="#t60">60</a></span><span class="t">    <span class="com"># If reg.py sends a "class details" query specifying a classid that does not exist in the database, then regserver.py must write a descriptive error message to its stderr and continue executing.</span>&nbsp;</span><span class="r"></span></p>
     <p id="t61" class="pln"><span class="n"><a href="#t61">61</a></span><span class="t">    <span class="com"># if classid does not exist</span>&nbsp;</span><span class="r"></span></p>
     <p id="t62" class="run"><span class="n"><a href="#t62">62</a></span><span class="t">    <span class="key">if</span> <span class="nam">row</span> <span class="key">is</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t63" class="run"><span class="n"><a href="#t63">63</a></span><span class="t">        <span class="nam">print</span><span class="op">(</span><span class="str">f"{argv[0]}: no class with classid "</span> <span class="op">+</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t63" class="mis show_mis"><span class="n"><a href="#t63">63</a></span><span class="t">        <span class="nam">print</span><span class="op">(</span><span class="str">f"{argv[0]}: no class with classid "</span> <span class="op">+</span>&nbsp;</span><span class="r"></span></p>
     <p id="t64" class="pln"><span class="n"><a href="#t64">64</a></span><span class="t">              <span class="nam">str</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="str">" exists"</span><span class="op">,</span> <span class="nam">file</span><span class="op">=</span><span class="nam">stderr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t65" class="run"><span class="n"><a href="#t65">65</a></span><span class="t">        <span class="nam">message</span> <span class="op">=</span> <span class="str">"There exists no class with the classid: "</span> <span class="op">+</span> <span class="nam">str</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t66" class="run"><span class="n"><a href="#t66">66</a></span><span class="t">        <span class="nam">out_flow</span> <span class="op">=</span> <span class="nam">sock</span><span class="op">.</span><span class="nam">makefile</span><span class="op">(</span><span class="nam">mode</span><span class="op">=</span><span class="str">"wb"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t67" class="run"><span class="n"><a href="#t67">67</a></span><span class="t">        <span class="nam">dump</span><span class="op">(</span><span class="nam">isSuccess</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t68" class="run"><span class="n"><a href="#t68">68</a></span><span class="t">        <span class="nam">dump</span><span class="op">(</span><span class="nam">message</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t69" class="run"><span class="n"><a href="#t69">69</a></span><span class="t">        <span class="nam">out_flow</span><span class="op">.</span><span class="nam">flush</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t65" class="mis show_mis"><span class="n"><a href="#t65">65</a></span><span class="t">        <span class="nam">message</span> <span class="op">=</span> <span class="str">"There exists no class with the classid: "</span> <span class="op">+</span> <span class="nam">str</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">1</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t66" class="mis show_mis"><span class="n"><a href="#t66">66</a></span><span class="t">        <span class="nam">out_flow</span> <span class="op">=</span> <span class="nam">sock</span><span class="op">.</span><span class="nam">makefile</span><span class="op">(</span><span class="nam">mode</span><span class="op">=</span><span class="str">"wb"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t67" class="mis show_mis"><span class="n"><a href="#t67">67</a></span><span class="t">        <span class="nam">dump</span><span class="op">(</span><span class="nam">isSuccess</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t68" class="mis show_mis"><span class="n"><a href="#t68">68</a></span><span class="t">        <span class="nam">dump</span><span class="op">(</span><span class="nam">message</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t69" class="mis show_mis"><span class="n"><a href="#t69">69</a></span><span class="t">        <span class="nam">out_flow</span><span class="op">.</span><span class="nam">flush</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t70" class="pln"><span class="n"><a href="#t70">70</a></span><span class="t">    <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t71" class="run"><span class="n"><a href="#t71">71</a></span><span class="t">        <span class="nam">firstrow</span> <span class="op">=</span> <span class="nam">row</span>&nbsp;</span><span class="r"></span></p>
     <p id="t72" class="run"><span class="n"><a href="#t72">72</a></span><span class="t">        <span class="nam">courseid</span> <span class="op">=</span> <span class="nam">str</span><span class="op">(</span><span class="nam">row</span><span class="op">[</span><span class="num">0</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -135,8 +135,8 @@
     <p id="t81" class="pln"><span class="n"><a href="#t81">81</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t82" class="run"><span class="n"><a href="#t82">82</a></span><span class="t">        <span class="nam">row</span> <span class="op">=</span> <span class="nam">cursor</span><span class="op">.</span><span class="nam">fetchone</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t83" class="run"><span class="n"><a href="#t83">83</a></span><span class="t">        <span class="key">while</span> <span class="nam">row</span> <span class="key">is</span> <span class="key">not</span> <span class="key">None</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t84" class="run"><span class="n"><a href="#t84">84</a></span><span class="t">            <span class="nam">message</span> <span class="op">+=</span> <span class="str">f"Dept and Number: {str(row[6])} {str(row[7])}\n"</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t85" class="run"><span class="n"><a href="#t85">85</a></span><span class="t">            <span class="nam">row</span> <span class="op">=</span> <span class="nam">cursor</span><span class="op">.</span><span class="nam">fetchone</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t84" class="mis show_mis"><span class="n"><a href="#t84">84</a></span><span class="t">            <span class="nam">message</span> <span class="op">+=</span> <span class="str">f"Dept and Number: {str(row[6])} {str(row[7])}\n"</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t85" class="mis show_mis"><span class="n"><a href="#t85">85</a></span><span class="t">            <span class="nam">row</span> <span class="op">=</span> <span class="nam">cursor</span><span class="op">.</span><span class="nam">fetchone</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t86" class="pln"><span class="n"><a href="#t86">86</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t87" class="run"><span class="n"><a href="#t87">87</a></span><span class="t">        <span class="nam">message</span> <span class="op">+=</span> <span class="str">'\n'</span>&nbsp;</span><span class="r"></span></p>
     <p id="t88" class="run"><span class="n"><a href="#t88">88</a></span><span class="t">        <span class="nam">message</span> <span class="op">+=</span> <span class="str">f"Area: {str(firstrow[8])}\n\n"</span>&nbsp;</span><span class="r"></span></p>
@@ -186,18 +186,18 @@
     <p id="t132" class="pln"><span class="n"><a href="#t132">132</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t133" class="pln"><span class="n"><a href="#t133">133</a></span><span class="t">                <span class="com"># make sure database exists</span>&nbsp;</span><span class="r"></span></p>
     <p id="t134" class="run"><span class="n"><a href="#t134">134</a></span><span class="t">                <span class="key">if</span> <span class="key">not</span> <span class="nam">path</span><span class="op">.</span><span class="nam">isfile</span><span class="op">(</span><span class="nam">DATABASE_NAME</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t135" class="run"><span class="n"><a href="#t135">135</a></span><span class="t">                    <span class="nam">print</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t135" class="mis show_mis"><span class="n"><a href="#t135">135</a></span><span class="t">                    <span class="nam">print</span><span class="op">(</span>&nbsp;</span><span class="r"></span></p>
     <p id="t136" class="pln"><span class="n"><a href="#t136">136</a></span><span class="t">                        <span class="str">f'{argv[0]}: database reg.sqlite not found'</span><span class="op">,</span> <span class="nam">file</span><span class="op">=</span><span class="nam">stderr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t137" class="run"><span class="n"><a href="#t137">137</a></span><span class="t">                    <span class="nam">message</span> <span class="op">=</span> <span class="str">"A server error occurred. Please contact the system administrator."</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t138" class="run"><span class="n"><a href="#t138">138</a></span><span class="t">                    <span class="nam">out_flow</span> <span class="op">=</span> <span class="nam">sock</span><span class="op">.</span><span class="nam">makefile</span><span class="op">(</span><span class="nam">mode</span><span class="op">=</span><span class="str">"wb"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t139" class="run"><span class="n"><a href="#t139">139</a></span><span class="t">                    <span class="nam">isSuccess</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t140" class="run"><span class="n"><a href="#t140">140</a></span><span class="t">                    <span class="nam">dump</span><span class="op">(</span><span class="nam">isSuccess</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t141" class="run"><span class="n"><a href="#t141">141</a></span><span class="t">                    <span class="nam">dump</span><span class="op">(</span><span class="nam">message</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t142" class="run"><span class="n"><a href="#t142">142</a></span><span class="t">                    <span class="nam">out_flow</span><span class="op">.</span><span class="nam">flush</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t137" class="mis show_mis"><span class="n"><a href="#t137">137</a></span><span class="t">                    <span class="nam">message</span> <span class="op">=</span> <span class="str">"A server error occurred. Please contact the system administrator."</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t138" class="mis show_mis"><span class="n"><a href="#t138">138</a></span><span class="t">                    <span class="nam">out_flow</span> <span class="op">=</span> <span class="nam">sock</span><span class="op">.</span><span class="nam">makefile</span><span class="op">(</span><span class="nam">mode</span><span class="op">=</span><span class="str">"wb"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t139" class="mis show_mis"><span class="n"><a href="#t139">139</a></span><span class="t">                    <span class="nam">isSuccess</span> <span class="op">=</span> <span class="key">False</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t140" class="mis show_mis"><span class="n"><a href="#t140">140</a></span><span class="t">                    <span class="nam">dump</span><span class="op">(</span><span class="nam">isSuccess</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t141" class="mis show_mis"><span class="n"><a href="#t141">141</a></span><span class="t">                    <span class="nam">dump</span><span class="op">(</span><span class="nam">message</span><span class="op">,</span> <span class="nam">out_flow</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t142" class="mis show_mis"><span class="n"><a href="#t142">142</a></span><span class="t">                    <span class="nam">out_flow</span><span class="op">.</span><span class="nam">flush</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t143" class="pln"><span class="n"><a href="#t143">143</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t144" class="pln"><span class="n"><a href="#t144">144</a></span><span class="t">                    <span class="com"># close socket</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t145" class="run"><span class="n"><a href="#t145">145</a></span><span class="t">                    <span class="nam">sock</span><span class="op">.</span><span class="nam">close</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t146" class="run"><span class="n"><a href="#t146">146</a></span><span class="t">                    <span class="nam">print</span><span class="op">(</span><span class="str">'Closed socket'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t145" class="mis show_mis"><span class="n"><a href="#t145">145</a></span><span class="t">                    <span class="nam">sock</span><span class="op">.</span><span class="nam">close</span><span class="op">(</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t146" class="mis show_mis"><span class="n"><a href="#t146">146</a></span><span class="t">                    <span class="nam">print</span><span class="op">(</span><span class="str">'Closed socket'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t147" class="pln"><span class="n"><a href="#t147">147</a></span><span class="t">                <span class="key">else</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t148" class="pln"><span class="n"><a href="#t148">148</a></span><span class="t">                    <span class="com"># connect to database</span>&nbsp;</span><span class="r"></span></p>
     <p id="t149" class="run"><span class="n"><a href="#t149">149</a></span><span class="t">                    <span class="nam">connection</span> <span class="op">=</span> <span class="nam">connect</span><span class="op">(</span><span class="nam">DATABASE_NAME</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
@@ -236,8 +236,8 @@
     <p id="t182" class="run"><span class="n"><a href="#t182">182</a></span><span class="t">                <span class="nam">print</span><span class="op">(</span><span class="str">'Closed socket'</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t183" class="pln"><span class="n"><a href="#t183">183</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t184" class="run"><span class="n"><a href="#t184">184</a></span><span class="t">    <span class="key">except</span> <span class="nam">Exception</span> <span class="key">as</span> <span class="nam">e</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t185" class="run"><span class="n"><a href="#t185">185</a></span><span class="t">        <span class="nam">print</span><span class="op">(</span><span class="str">f'{argv[0]}: {e}'</span><span class="op">,</span> <span class="nam">file</span><span class="op">=</span><span class="nam">stderr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t186" class="run"><span class="n"><a href="#t186">186</a></span><span class="t">        <span class="nam">exit</span><span class="op">(</span><span class="num">1</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t185" class="mis show_mis"><span class="n"><a href="#t185">185</a></span><span class="t">        <span class="nam">print</span><span class="op">(</span><span class="str">f'{argv[0]}: {e}'</span><span class="op">,</span> <span class="nam">file</span><span class="op">=</span><span class="nam">stderr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t186" class="mis show_mis"><span class="n"><a href="#t186">186</a></span><span class="t">        <span class="nam">exit</span><span class="op">(</span><span class="num">1</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t187" class="pln"><span class="n"><a href="#t187">187</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t188" class="pln"><span class="n"><a href="#t188">188</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t189" class="run"><span class="n"><a href="#t189">189</a></span><span class="t"><span class="key">if</span> <span class="nam">__name__</span> <span class="op">==</span> <span class="str">'__main__'</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
@@ -247,7 +247,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.4</a>,
-            created at 2021-03-09 19:50 -0500
+            created at 2021-03-09 20:01 -0500
         </p>
     </div>
 </div>

@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=emulateIE7" />
-    <title>Coverage for database_handler.py: 100%</title>
+    <title>Coverage for database_handler.py: 73%</title>
     <link rel="icon" sizes="32x32" href="favicon_32.png">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script type="text/javascript" src="jquery.min.js"></script>
@@ -18,13 +18,13 @@
 <div id="header">
     <div class="content">
         <h1>Coverage for <b>database_handler.py</b> :
-            <span class="pc_cov">100%</span>
+            <span class="pc_cov">73%</span>
         </h1>
         <img id="keyboard_icon" src="keybd_closed.png" alt="Show keyboard shortcuts" />
         <h2 class="stats">
             30 statements &nbsp;
-            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">30 run</button>
-            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">0 missing</button>
+            <button type="button" class="run shortkey_r button_toggle_run" title="Toggle lines run">22 run</button>
+            <button type="button" class="mis show_mis shortkey_m button_toggle_mis" title="Toggle lines missing">8 missing</button>
             <button type="button" class="exc show_exc shortkey_x button_toggle_exc" title="Toggle lines excluded">0 excluded</button>
         </h2>
     </div>
@@ -58,8 +58,8 @@
     <p id="t4" class="run"><span class="n"><a href="#t4">4</a></span><span class="t">    <span class="nam">char_arr</span> <span class="op">=</span> <span class="nam">list</span><span class="op">(</span><span class="nam">input_str</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t5" class="run"><span class="n"><a href="#t5">5</a></span><span class="t">    <span class="key">while</span> <span class="nam">i</span> <span class="key">in</span> <span class="nam">range</span><span class="op">(</span><span class="nam">len</span><span class="op">(</span><span class="nam">char_arr</span><span class="op">)</span><span class="op">)</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
     <p id="t6" class="run"><span class="n"><a href="#t6">6</a></span><span class="t">        <span class="key">if</span> <span class="nam">char_arr</span><span class="op">[</span><span class="nam">i</span><span class="op">]</span> <span class="key">in</span> <span class="op">[</span><span class="str">"%"</span><span class="op">,</span> <span class="str">"_"</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t7" class="run"><span class="n"><a href="#t7">7</a></span><span class="t">            <span class="nam">char_arr</span><span class="op">.</span><span class="nam">insert</span><span class="op">(</span><span class="nam">i</span><span class="op">,</span> <span class="str">"#"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t8" class="run"><span class="n"><a href="#t8">8</a></span><span class="t">            <span class="nam">i</span> <span class="op">+=</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t7" class="mis show_mis"><span class="n"><a href="#t7">7</a></span><span class="t">            <span class="nam">char_arr</span><span class="op">.</span><span class="nam">insert</span><span class="op">(</span><span class="nam">i</span><span class="op">,</span> <span class="str">"#"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t8" class="mis show_mis"><span class="n"><a href="#t8">8</a></span><span class="t">            <span class="nam">i</span> <span class="op">+=</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
     <p id="t9" class="run"><span class="n"><a href="#t9">9</a></span><span class="t">        <span class="nam">i</span> <span class="op">+=</span> <span class="num">1</span>&nbsp;</span><span class="r"></span></p>
     <p id="t10" class="run"><span class="n"><a href="#t10">10</a></span><span class="t">    <span class="key">return</span> <span class="str">''</span><span class="op">.</span><span class="nam">join</span><span class="op">(</span><span class="nam">char_arr</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t11" class="pln"><span class="n"><a href="#t11">11</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -81,14 +81,14 @@
     <p id="t27" class="run"><span class="n"><a href="#t27">27</a></span><span class="t">        <span class="nam">arg_arr</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">"%"</span> <span class="op">+</span> <span class="nam">result</span> <span class="op">+</span> <span class="str">"%"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t28" class="pln"><span class="n"><a href="#t28">28</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t29" class="run"><span class="n"><a href="#t29">29</a></span><span class="t">    <span class="key">if</span> <span class="nam">args</span><span class="op">[</span><span class="num">3</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t30" class="run"><span class="n"><a href="#t30">30</a></span><span class="t">        <span class="nam">sql_command</span> <span class="op">+=</span> <span class="str">" AND area LIKE ? ESCAPE '#'"</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t31" class="run"><span class="n"><a href="#t31">31</a></span><span class="t">        <span class="nam">result</span> <span class="op">=</span> <span class="nam">special_char_mod</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">3</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t32" class="run"><span class="n"><a href="#t32">32</a></span><span class="t">        <span class="nam">arg_arr</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">"%"</span> <span class="op">+</span> <span class="nam">result</span> <span class="op">+</span> <span class="str">"%"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t30" class="mis show_mis"><span class="n"><a href="#t30">30</a></span><span class="t">        <span class="nam">sql_command</span> <span class="op">+=</span> <span class="str">" AND area LIKE ? ESCAPE '#'"</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t31" class="mis show_mis"><span class="n"><a href="#t31">31</a></span><span class="t">        <span class="nam">result</span> <span class="op">=</span> <span class="nam">special_char_mod</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">3</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t32" class="mis show_mis"><span class="n"><a href="#t32">32</a></span><span class="t">        <span class="nam">arg_arr</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">"%"</span> <span class="op">+</span> <span class="nam">result</span> <span class="op">+</span> <span class="str">"%"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t33" class="pln"><span class="n"><a href="#t33">33</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t34" class="run"><span class="n"><a href="#t34">34</a></span><span class="t">    <span class="key">if</span> <span class="nam">args</span><span class="op">[</span><span class="num">4</span><span class="op">]</span><span class="op">:</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t35" class="run"><span class="n"><a href="#t35">35</a></span><span class="t">        <span class="nam">sql_command</span> <span class="op">+=</span> <span class="str">" AND title LIKE ? ESCAPE '#'"</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t36" class="run"><span class="n"><a href="#t36">36</a></span><span class="t">        <span class="nam">result</span> <span class="op">=</span> <span class="nam">special_char_mod</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">4</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
-    <p id="t37" class="run"><span class="n"><a href="#t37">37</a></span><span class="t">        <span class="nam">arg_arr</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">"%"</span> <span class="op">+</span> <span class="nam">result</span> <span class="op">+</span> <span class="str">"%"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t35" class="mis show_mis"><span class="n"><a href="#t35">35</a></span><span class="t">        <span class="nam">sql_command</span> <span class="op">+=</span> <span class="str">" AND title LIKE ? ESCAPE '#'"</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t36" class="mis show_mis"><span class="n"><a href="#t36">36</a></span><span class="t">        <span class="nam">result</span> <span class="op">=</span> <span class="nam">special_char_mod</span><span class="op">(</span><span class="nam">args</span><span class="op">[</span><span class="num">4</span><span class="op">]</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
+    <p id="t37" class="mis show_mis"><span class="n"><a href="#t37">37</a></span><span class="t">        <span class="nam">arg_arr</span><span class="op">.</span><span class="nam">append</span><span class="op">(</span><span class="str">"%"</span> <span class="op">+</span> <span class="nam">result</span> <span class="op">+</span> <span class="str">"%"</span><span class="op">)</span>&nbsp;</span><span class="r"></span></p>
     <p id="t38" class="pln"><span class="n"><a href="#t38">38</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
     <p id="t39" class="run"><span class="n"><a href="#t39">39</a></span><span class="t">    <span class="nam">sql_command</span> <span class="op">+=</span> <span class="str">" ORDER BY dept ASC, coursenum ASC, classid ASC"</span>&nbsp;</span><span class="r"></span></p>
     <p id="t40" class="pln"><span class="n"><a href="#t40">40</a></span><span class="t">&nbsp;</span><span class="r"></span></p>
@@ -98,7 +98,7 @@
     <div class="content">
         <p>
             <a class="nav" href="index.html">&#xab; index</a> &nbsp; &nbsp; <a class="nav" href="https://coverage.readthedocs.io">coverage.py v5.4</a>,
-            created at 2021-03-09 19:50 -0500
+            created at 2021-03-09 20:01 -0500
         </p>
     </div>
 </div>
