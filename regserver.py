@@ -85,13 +85,11 @@ def handleDetails(sock, cursor, args):
             row = cursor.fetchone()
 
         message += '\n'
-        # print(wrapper.fill("Area: " + str(firstrow[8])))
         message += f"Area: {str(firstrow[8])}\n\n"
         message += f"Title: {str(firstrow[9])}\n\n"
         message += f"Description: {str(firstrow[10])}\n\n"
         message += f"Prerequisites: {str(firstrow[11])}\n\n"
 
-        # remove later
         cursor.execute(sql_command2, [courseid])
         row = cursor.fetchone()
         while row is not None:
