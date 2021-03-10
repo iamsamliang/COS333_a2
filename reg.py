@@ -89,19 +89,24 @@ def main(argv):
         packet = ["details", class_id]
 
         # send the values to regserver.py
-        sock = socket()
-        sock.connect((host, port))
-        out_flow = sock.makefile(mode='wb')
-        dump(packet, out_flow)
-        out_flow.flush()
+        try:
+            sock = socket()
+            sock.connect((host, port))
+            out_flow = sock.makefile(mode='wb')
+            dump(packet, out_flow)
+            out_flow.flush()
 
-        # retrieve the values from regserver.py
-        in_flow = sock.makefile(mode='rb')
-        isSuccess = load(in_flow)
-        message = load(in_flow)
+            # retrieve the values from regserver.py
+            in_flow = sock.makefile(mode='rb')
+            isSuccess = load(in_flow)
+            message = load(in_flow)
 
-        # close connection
-        sock.close()
+            # close connection
+            sock.close()
+
+        except:
+            isSuccess = False
+            db_rows = "[Errno 111] Connection refused"
 
         if not isSuccess:
             # display error with classid not existing in database
