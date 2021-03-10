@@ -1,4 +1,4 @@
-saml_
+saml_sumanthm
 Assignment Number: 2
 Name: Sam Liang
 Partner Name: Sumanth Maddirala
@@ -9,8 +9,8 @@ pyqt5 documentation, python socket documentation,
 lectures on database, GUI, and servers along with their example code
 Hours spent: 20 hours
 
-Sam Contributions: Sam wrote the code for the argparse and also most of the functions communicating with the database (handler, handleOverviews, handleDetails). He also wrote the code for socket connection between regserver.py and reg.py along with the flow of information between the socket and closing the socket. He also did the GUI interface and putting all the widgets in the correct position and right font and that the list entries in the list box were highlighted. He also wrote the retreiveText method and all the code for detecting clicks and input and connecting them to the write function. He also wrote the code for making sure reg.py doesn't end when it encounters certain errors.
+Sam Contributions: Sam wrote the code for the argparse and also most of the functions communicating with the database (handler, handleOverviews). He also wrote the code for socket connection between regserver.py and reg.py along with the flow of information between the socket and closing the socket. He also did the GUI interface and putting all the widgets in the correct position and right font and that the list entries in the list box were highlighted. He also wrote the retreiveText method and all the code for detecting clicks and input and connecting them to the write function. He also wrote the code for making sure reg.py doesn't end when it encounters certain errors.
 
-Sumanth Partner contributions:
+Sumanth Partner contributions: Sumanth created most of the objects (buttons, list widgets, etc) for the reg.py program, and wrote most of the error message boxes and implemented the clicking and enter-key functionalities. He also wrote the handleDetails and retrieveDetails methods, and laid out the testing plan. He also checked all the exit status and handled the exception statements.
 
-Suggestions:
+Suggestions: This assignment felt substantially easier than the previous one, given that most of the heavy lifting was done in the previous one. In this assignment, one source of trouble was trying to find documentation to check for the "tab-key" functionality of the reg.py module. However, we were unaware that this was a built in functionality of the MessageBox itself, so maybe explicit mention of this in the lectures would be helpful. 
