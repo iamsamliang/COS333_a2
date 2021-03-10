@@ -106,7 +106,7 @@ def main(argv):
 
         except:
             isSuccess = False
-            db_rows = "[Errno 111] Connection refused"
+            message = "[Errno 111] Connection refused"
 
         if not isSuccess:
             # display error with classid not existing in database
